@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/styles.css"><!--
+        When you use Express, it doesn't automatically serve up all the files in your project, No.
+        In fact it only serves up the main access point which we define in our packag.json as app.js and it also serves up the views folder. 
+        But everything else it chooses to ignore.
+        So you can't simply just go to localhost:3000 /css/styles.css because we're no longer operating a static website and in fact all the files 
+        if we want to use them they have to be served up by our server. So even though we can see that that file exists at that pathway, 
+        we can't simply just use this as a href to access it when we're creating a server based website. 
+
+        In order to access the CSS for our websitewe have to tell Express explicitly to serve up the CSS files. And we need to tell it the location of our file
+        and tell it to use it. Now in the future, we might be creating other static files that are not CSS for example some plain Javascript
+        which we need to run on the browser side or images or sound assets or various other things. So normally, 
+        developers will create a new folder called 'public' and inside this public folder you can have your CSS folder and you can have your Javascript folder,
+        you can have your images folder and we can tell Express to serve up this 'public' folder as a static resource.
+
+        So in order to do that, we go over to app.js and we're going to say-: app.use(express.static("public"));
+        and then we specify the location of our static files which is the folder called public.
+    -->
+</head>
+<body>
+    <div class="box" id="heading">
+        <h1> <%= titleDMY %> </h1>
+        <h1>My <%= titleWd %>  Plan</h1>
+    </div>
+
+
+    <div class="box">
+        <% for(var i=0; i< newListItems.length; i++){ %>
+        <div class="item">
+            <input type="checkbox">
+            <p> <%= newListItems[i] %> </p>
+        </div>
+        <% } %>
+
+
+        <form class="item" action="/" method="POST">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off" maxlength="30">
+            <button type="submit" name="button" value="">+</button>
+        </form>
+    </div>
+    
+
+    
+</body>
+</html>
