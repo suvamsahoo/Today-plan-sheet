@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/styles.css"><!--
+    <link rel="stylesheet" href="css/styles.css" />
+    <!--
         When you use Express, it doesn't automatically serve up all the files in your project, No.
         In fact it only serves up the main access point which we define in our packag.json as app.js and it also serves up the views folder. 
         But everything else it chooses to ignore.
@@ -22,30 +23,39 @@
         So in order to do that, we go over to app.js and we're going to say-: app.use(express.static("public"));
         and then we specify the location of our static files which is the folder called public.
     -->
-</head>
-<body>
+  </head>
+  <body>
     <div class="box" id="heading">
-        <h1> <%= titleDMY %> </h1>
-        <h1>My <%= titleWd %>  Plan</h1>
+      <h1><%= titleDMY %></h1>
+      <h1>My <%= titleWd %> Plan</h1>
     </div>
-
 
     <div class="box">
-        <% for(var i=0; i< newListItems.length; i++){ %>
+      <% newListItems.forEach((doc) => { %>
+      <form action="/delete" method="POST">
         <div class="item">
-            <input type="checkbox">
-            <p> <%= newListItems[i] %> </p>
+          <!-- submiting a form when a checkbox is checked by this attribute onchange="this.form.submit()" -->
+          <input
+            type="checkbox"
+            value="<%= doc._id %>"
+            name="checkBoxItem"
+            onchange="this.form.submit()"
+          />
+          <p><%= doc.name %></p>
         </div>
-        <% } %>
+      </form>
+      <% }) %>
 
-
-        <form class="item" action="/" method="POST">
-            <input type="text" name="newItem" placeholder="New Item" autocomplete="off" maxlength="30">
-            <button type="submit" name="button" value="">+</button>
-        </form>
+      <form class="item" action="/" method="POST">
+        <input
+          type="text"
+          name="newItem"
+          placeholder="New Item"
+          autocomplete="off"
+          maxlength="30"
+        />
+        <button type="submit" name="button" value="">+</button>
+      </form>
     </div>
-    
-
-    
-</body>
+  </body>
 </html>
